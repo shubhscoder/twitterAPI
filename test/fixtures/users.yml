@@ -2,7 +2,7 @@
 
 one:
   username: MyString
-  password: MyString
+  password_digest: MyString
   number_of_tweets: 1
   email: MyString
   firstname: MyString
@@ -14,7 +14,7 @@ one:
 
 two:
   username: MyString
-  password: MyString
+  password_digest: MyString
   number_of_tweets: 1
   email: MyString
   firstname: MyString
