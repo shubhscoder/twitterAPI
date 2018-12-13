@@ -18,11 +18,10 @@ class AuthenticationController < ApplicationController
  end
 
  def logout
- 	if headers['Authorization'].present?
-		to_be_blacklisted = BlacklistedToken.new(token: headers['Authorization'].split(' ').last)
-		if to_be_blacklisted.save?
-		
-		render json: { status: "Ok", message: "Successfully logged out"}
+ 	if request.headers['Authorization'].present?
+		to_be_blacklisted = BlacklistedToken.new(token: request.headers['Authorization'].split(' ').last)
+		if to_be_blacklisted.save
+			render json: { status: "Ok", message: "Successfully logged out"}
 		else
 			render json: { status: "Nok", message: "Already logged out" }
 		end
