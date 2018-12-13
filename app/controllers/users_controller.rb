@@ -15,4 +15,10 @@ class UsersController < ApplicationController
 				:error => "#{@user.errors}"
 			}
 	end
+
+	private
+
+	def permitted_params
+		params.require(:user).permit(:username,:email,:password_digest)
+	end
 end
