@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	skip_before_action :authenticate_request, only: %i[create]
 	def new
 		@user = User.new
 	end
@@ -6,19 +7,17 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(permitted_params)
 		if @user.save
-			render :json => {
-				:status => "Successfully registered"
-			}
+			msg = { status: "Ok", message: "Successfully registered!" }
+			render :json => msg
 		else
-			render :json => {
-				:status => "Error in registration"
-				:error => "#{@user.errors}"
-			}
+			msg = { status: "Nok", message: "#{@user.errors}" }
+			render :json => msg
+		end
 	end
 
 	private
 
 	def permitted_params
-		params.require(:user).permit(:username,:email,:password_digest)
+		params.permit(:username,:email,:password)
 	end
 end
