@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'simple_command', '~> 0.0.9'
+gem 'jc-validates_timeliness', '~> 3.1', '>= 3.1.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
