@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(permitted_params)
 		if @user.save
-			@user.update(date_of_joining: Time.new.strftime("%Y-%m-%d"))
 			msg = { status: "Ok", message: "Successfully registered!" }
 			render :json => msg
 		else
@@ -23,36 +22,69 @@ class UsersController < ApplicationController
 					errors[attribute] << attribute_errors
 				end
 			end
-			msg = { status: "Nok", message: "Registration was not successful", error: errors }
-			render :json => msg
+			render :json => { status: "Nok", message: "Registration was not successful", error: errors }
 		end
 	end
 
 	def add_follower
 		user_to_be_followed = User.find_by_username(params[:username])
+		stat = "Nok"
 		if user_to_be_followed.nil?
-			render :json => { status: "Nok", message: "No such User"}
+			msg = "No such User"
 		elsif current_user.add_follow(user_to_be_followed)
-			render :json => { status: "Ok", message: "Started following #{params[:username]}"}
+			stat = "Ok"
+			msg = "Started following #{params[:username]}"
 		else
-			render :json => { status: "Nok", message: "You already follow this user"}
+			msg = "You already follow this user"
 		end
+		render :json => { status: stat, message: msg }
 	end
 
 	def remove_follower
 		user_to_be_unfollowed = User.find_by_username(params[:username])
+		stat = "Nok"
 		if user_to_be_unfollowed.nil?
-			render :json => { status: "Nok", message: "No such User"}
+			msg = "No such User"
 		elsif current_user.unfollow_user(user_to_be_unfollowed)
-			render :json => { status: "Ok", message: "Unfollowed #{params[:username]} Successfully"}
+			stat = "Ok"
+			msg = "Unfollowed #{params[:username]} Successfully"
 		else 
-			render :json => { status: "Nok", message: "You can't unfollow a user that you don't follow"}
+			msg = "You can't unfollow a user that you don't follow"
 		end
+		render :json => { status: stat, message: msg }
 	end
 
+	def get_followers_tweets
+		user_feed, size = current_user.get_followers_tweets
+		msg = "No tweets in the feed"
+		if size>0
+			msg = user_feed
+		end
+		render :json => { status: "Ok", message: msg }
+	end
+
+	def get_users_followers
+		followers_list = current_user.get_my_followers
+		msg = "You have no followers"
+		if followers_list.size > 0
+			msg = followers_list
+		end
+		render :json => { status: "Ok", message: msg }
+	end
+
+	def get_users_following
+		following_list = current_user.get_my_following
+		msg = "You have no following"
+		if following_list.size > 0
+			msg = following_list
+		end
+		render :json => { status: "Ok", message: msg }
+	end
+	
 	private
 
 	def permitted_params
-		params.permit(:username, :email, :password, :firstname, :lastname, :date_of_birth)
+		params["date_of_joining"] = Time.new.strftime("%Y-%m-%d")
+		params.permit(:username, :email, :password, :firstname, :lastname, :date_of_birth, :date_of_joining)
 	end
 end
