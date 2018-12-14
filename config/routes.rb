@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 	post 'login', to: 'authentication#authenticate'
 	post 'register', to: 'users#create'
 	post 'logout', to: 'authentication#logout'
+	get 'follow/:username', to: 'users#add_follower'
+	get 'unfollow/:username', to: 'users#remove_follower'
 end

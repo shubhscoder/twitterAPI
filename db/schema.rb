@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_133512) do
+ActiveRecord::Schema.define(version: 2018_12_14_053237) do
 
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,8 +39,8 @@ ActiveRecord::Schema.define(version: 2018_12_13_133512) do
     t.string "current_login_ip"
     t.string "last_login_ip"
     t.date "date_of_joining"
-    t.integer "followers", default: 0
-    t.integer "following", default: 0
+    t.integer "followers_count", default: 0
+    t.integer "following_count", default: 0
     t.string "time_zone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
