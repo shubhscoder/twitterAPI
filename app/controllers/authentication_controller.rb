@@ -5,15 +5,11 @@ class AuthenticationController < ApplicationController
    command = AuthenticateUser.call(params[:email], params[:password])
    user = User.find_by_email(params[:email])
    if command.success?
-   	if BlacklistedToken.find_by_token(command.result).nil?
    		user.increment!(:login_count)
 		user.update({failed_login_count: 0,current_login_ip: request.remote_ip.to_s})
     	render json: { status: "Ok", message: "Successfully logged in", auth_token: command.result }
-    else
-    	render json: { status: "Nok", message: "Invalid token.Please try again.", error: command.errors }, status: :unauthorized
-    end
    else
-    render json: { status: "Nok", message: "Login failed", error: command.errors }, status: :unauthorized
+		render json: { status: "Nok", message: "Login failed", error: command.errors }, status: :unauthorized
    end
  end
 

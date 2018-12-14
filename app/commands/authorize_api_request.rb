@@ -24,7 +24,12 @@ class AuthorizeApiRequest
 
 	def http_auth_header
 		if headers['Authorization'].present?
-			return headers['Authorization'].split(' ').last
+			recvd_token = headers['Authorization'].split(' ').last
+			if BlacklistedToken.find_by_token(recvd_token).nil?
+				return recvd_token
+			else
+				errors.add(:token, 'Blacklisted token')
+			end
 		else
 			errors.add(:token, 'Missing token')
 		end
