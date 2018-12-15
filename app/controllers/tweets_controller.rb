@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
   		if @tweet.save
   			current_user.increment!(:number_of_tweets)
   			@tweet.update(:user_id => current_user.id)
-  			render :json => { status: "Ok", message: "Tweeted Successfully" }
+  			render :json => { status: "Ok", message: "Tweeted Successfully", tweet_id: @tweet.id }
   		else
   			render :json => { status: "Nok", message: "Problem creating a tweet. Please try again" }
   		end
@@ -33,14 +33,20 @@ class TweetsController < ApplicationController
   	def make_retweet
   		stat = "Nok"
   		original_tweet = Tweet.find_by_id(params[:retweet_id])
-  		if original_tweet.nil?
+		  if original_tweet.nil?
+			stat = "Nok"
   			msg = "You cannot retweet a non existent tweet"
   		else
-  			new_retweet = Tweet.new(user_id: current_user, tweet_content: original_tweet.tweet_content)
-  			msg = "Retweeted Successfully"
-  			stat = "Ok"
+			@new_retweet = Tweet.new(user_id: current_user.id, tweet_content: original_tweet.tweet_content)
+			if @new_retweet.save
+  				msg = "Retweeted Successfully"
+				stat = "Ok"
+			else
+				stat = "Nok"
+				msg = "Some error occured while re-tweeting. Please try again"
+			end
   		end
-  		render :json => { status: stat, message: msg }
+  		render :json => { status: stat, message: msg, retweet_id: @new_retweet.id }
   	end
 
   	private 

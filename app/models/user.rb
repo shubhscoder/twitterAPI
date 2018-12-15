@@ -46,7 +46,7 @@ class User < ApplicationRecord
 	end
 
 	def get_followers_tweets
-		user_follower_tweets = Tweet.select("t.id, t.created_at, t.tweet_content, t.user_id").from("tweets t").joins("INNER JOIN follows as f ON t.user_id = f.following_id").where("f.user_id = ?",self.id)
+		user_follower_tweets = Tweet.select("t.id, t.created_at, t.tweet_content, t.user_id, t.number_of_likes").from("tweets t").joins("INNER JOIN follows as f ON t.user_id = f.following_id").where("f.user_id = ?",self.id)
 		array_of_tweets = filter_tweets(user_follower_tweets)
 		return array_of_tweets,array_of_tweets.size
 	end
@@ -86,6 +86,7 @@ class User < ApplicationRecord
 			dict_tweet["tweet_content"] = i.tweet_content
 			dict_tweet["created_at"] = i.created_at
 			dict_tweet["tweet_id"] = i.id
+			dict_tweet["number_of_likes"] = i.number_of_likes
 			array_of_tweets << dict_tweet 
 		end
 		array_of_tweets = array_of_tweets.sort_by {|k| k["created_at"] }
