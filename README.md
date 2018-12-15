@@ -24,7 +24,7 @@ A REST API created using the Rails framework with the Ruby programming language 
 # Getting Started
 
 ## Installing Dependencies
-* <b>Ruby - Version 2.4.1</b><br>
+* Ruby - Version 2.4.1</b><br>
     Install the Ruby programming language.<br>It is recommended to do so by installing rbenv or rvm and then installing Ruby using either one of those version managers.<br><b>Rbenv</b> and <b>rvm</b> installation guides for popular operating systems are available on the internet and it is recommended to follow those guides.<br>If your operating system is Ubuntu 16.04, instructions to install Ruby using rbenv or rvm [can be found here](https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-16-04).
 
 * <b>Bundler - Version 1.17.2</b><br>
@@ -280,7 +280,7 @@ Response body:
 }
 ```
 NOTE: The above endpoint can also be used to fetch the tweets of logged in user by passing his/her username as follows:<br>
-Example Request that has been sent: http://localhost:3000/usertweets/john
+Example Request that has been sent: http://localhost:3000/usertweets/john<br><br>
 Header:
 ```bash
 {
