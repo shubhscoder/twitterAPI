@@ -24,7 +24,7 @@ A REST API created using the Rails framework with the Ruby programming language 
 # Getting Started
 
 ## Installing Dependencies
-* Ruby - Version 2.4.1</b><br>
+* <b>Ruby - Version 2.4.1</b><br>
     Install the Ruby programming language.<br>It is recommended to do so by installing rbenv or rvm and then installing Ruby using either one of those version managers.<br><b>Rbenv</b> and <b>rvm</b> installation guides for popular operating systems are available on the internet and it is recommended to follow those guides.<br>If your operating system is Ubuntu 16.04, instructions to install Ruby using rbenv or rvm [can be found here](https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-16-04).
 
 * <b>Bundler - Version 1.17.2</b><br>
@@ -153,7 +153,7 @@ Response body:
 ```
 
 ## Follow a user:
-### <b>GET: http://localhost:3000/follow/&lt;:username&gt;</b>
+### <b>GET: http://localhost:3000/follow/\<:username\></b>
 
 Example Request that has been sent: http://localhost:3000/follow/scube<br><br>
 Header:
@@ -171,7 +171,7 @@ Response body:
 ```
 
 ## Unfollow a user:
-### <b>GET: http://localhost:3000/unfollow/&lt;:username&gt;</b>
+### <b>GET: http://localhost:3000/unfollow/\<:username\></b>
 
 Example Request that has been sent: http://localhost:3000/unfollow/scube<br><br>
 Header:
@@ -251,7 +251,7 @@ Response body:
 ```
 
 ## Read tweets from a particular user:
-### <b>GET: http://localhost:3000/usertweets/&lt;:username&gt;</b>
+### <b>GET: http://localhost:3000/usertweets/\<:username\></b>
 Example Request that has been sent: http://localhost:3000/usertweets/jane<br><br>
 Header:
 ```bash
@@ -306,7 +306,7 @@ Response body:
 ```
 
 ## Delete a tweet:
-### <b>DELETE: http://localhost:3000/remove/&lt;:tweet_id&gt;</b>
+### <b>DELETE: http://localhost:3000/remove/\<:tweet_id\></b>
 Example Request that has been sent: http://localhost:3000/remove/4<br><br>
 Header:
 ```bash
@@ -322,7 +322,7 @@ Response body:
 }
 ```
 ## Liking a tweet:
-### <b>GET: http://localhost:3000/like/&lt;:tweet_id&gt;</b>
+### <b>GET: http://localhost:3000/like/\<:tweet_id\></b>
 Example Request that has been sent: http://localhost:3000/like/6<br><br>
 Header:
 ```bash
@@ -362,7 +362,7 @@ Now, let us view the result of fetching all tweets from Jane as tweet ID 6 belon
 It can be observed that the number of likes of the 6th tweet has increased to 1.
 
 ## Unliking a tweet:
-### <b>GET: http://localhost:3000/unlike/&lt;:tweet_id&gt;</b>
+### <b>GET: http://localhost:3000/unlike/\<:tweet_id\></b>
 Example Request that has been sent: http://localhost:3000/unlike/6<br><br>
 Header:
 ```bash
@@ -402,7 +402,7 @@ Now, let us view the result of fetching all tweets from Jane as tweet ID 6 belon
 It can be observed that the number of likes of the 6th tweet has decreased to 0.
 
 ## Re-tweet an existing tweet:
-### <b>GET: http://localhost:3000/retweet/&lt;:tweet_id&gt;</b>
+### <b>GET: http://localhost:3000/retweet/\<:tweet_id\></b>
 Example Request that has been sent: http://localhost:3000/retweet/6<br><br>
 Header:
 ```bash
