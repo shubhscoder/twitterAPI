@@ -91,7 +91,9 @@ In Linux systems, it can be done as follows:
     2. http://<machine_ip_address>:3000
 
 # API Endpoint Descriptions:
-<b>NOTE: All requests except for registration and login need to be sent alongwith an Authorization header containing a JWT token. Without this token, an unauthorized 401 status message will be received.</b>
+<b>NOTE: All requests except for registration and login need to be sent alongwith an Authorization header containing a JWT token. Without this token, an unauthorized 401 status message will be received.</b><br>
+
+<b>NOTE: Corner cases for each endpoint have been tested and shared in a separate Postman collection. Please contact the collaborators and repository owner for more information regarding the same.</b> 
 
 ## User Registration:
 ### <b>POST: http://localhost:3000/register</b>
