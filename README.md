@@ -153,7 +153,7 @@ Response body:
 ```
 
 ## Follow a user:
-### <b>GET: http://localhost:3000/follow/\<:username\></b>
+### <b>GET: http://localhost:3000/follow/<:username></b>
 
 Example Request that has been sent: http://localhost:3000/follow/scube<br><br>
 Header:
@@ -171,7 +171,7 @@ Response body:
 ```
 
 ## Unfollow a user:
-### <b>GET: http://localhost:3000/unfollow/\<:username\></b>
+### <b>GET: http://localhost:3000/unfollow/<:username></b>
 
 Example Request that has been sent: http://localhost:3000/unfollow/scube<br><br>
 Header:
@@ -251,7 +251,7 @@ Response body:
 ```
 
 ## Read tweets from a particular user:
-### <b>GET: http://localhost:3000/usertweets/\<:username\></b>
+### <b>GET: http://localhost:3000/usertweets/<:username></b>
 Example Request that has been sent: http://localhost:3000/usertweets/jane<br><br>
 Header:
 ```bash
@@ -306,7 +306,7 @@ Response body:
 ```
 
 ## Delete a tweet:
-### <b>DELETE: http://localhost:3000/remove/\<:tweet_id\></b>
+### <b>DELETE: http://localhost:3000/remove/<:tweet_id></b>
 Example Request that has been sent: http://localhost:3000/remove/4<br><br>
 Header:
 ```bash
@@ -322,7 +322,7 @@ Response body:
 }
 ```
 ## Liking a tweet:
-### <b>GET: http://localhost:3000/like/\<:tweet_id\></b>
+### <b>GET: http://localhost:3000/like/<:tweet_id></b>
 Example Request that has been sent: http://localhost:3000/like/6<br><br>
 Header:
 ```bash
@@ -362,7 +362,7 @@ Now, let us view the result of fetching all tweets from Jane as tweet ID 6 belon
 It can be observed that the number of likes of the 6th tweet has increased to 1.
 
 ## Unliking a tweet:
-### <b>GET: http://localhost:3000/unlike/\<:tweet_id\></b>
+### <b>GET: http://localhost:3000/unlike/<:tweet_id></b>
 Example Request that has been sent: http://localhost:3000/unlike/6<br><br>
 Header:
 ```bash
@@ -402,7 +402,7 @@ Now, let us view the result of fetching all tweets from Jane as tweet ID 6 belon
 It can be observed that the number of likes of the 6th tweet has decreased to 0.
 
 ## Re-tweet an existing tweet:
-### <b>GET: http://localhost:3000/retweet/\<:tweet_id\></b>
+### <b>GET: http://localhost:3000/retweet/<:tweet_id></b>
 Example Request that has been sent: http://localhost:3000/retweet/6<br><br>
 Header:
 ```bash
