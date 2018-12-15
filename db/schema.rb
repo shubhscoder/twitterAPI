@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_14_183008) do
+ActiveRecord::Schema.define(version: 2018_12_15_112816) do
 
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "token"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_12_14_183008) do
     t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "following_id"], name: "index_follows_on_user_id_and_following_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_12_14_183008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number_of_likes", default: 0
+    t.integer "previous_tweet_id", default: 0
   end
 
   create_table "users", force: :cascade do |t|

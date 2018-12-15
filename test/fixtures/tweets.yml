@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+tweet_without_user_id:
   user_id: 
   tweet_content: MyText
 
-two:
-  user_id: 
-  tweet_content: MyText
+tweet_without_content:
+  user_id: 2
+  tweet_content: 
+
+

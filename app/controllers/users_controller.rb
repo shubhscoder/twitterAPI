@@ -31,6 +31,8 @@ class UsersController < ApplicationController
 		stat = "Nok"
 		if user_to_be_followed.nil?
 			msg = "No such User"
+		elsif current_user.username == params[:username]
+			msg = "You cannot follow yourself"
 		elsif current_user.add_follow(user_to_be_followed)
 			stat = "Ok"
 			msg = "Started following #{params[:username]}"
@@ -79,6 +81,23 @@ class UsersController < ApplicationController
 			msg = following_list
 		end
 		render :json => { status: "Ok", message: msg }
+	end
+
+	def get_requested_tweets
+		stat = "Nok"
+		requested_user = User.find_by_username(params[:username])
+		if requested_user.nil?
+			msg = "No such user"
+		else
+			stat = "Ok"
+			requested_tweets,size = requested_user.get_tweets
+			if size == 0
+				msg = "The user has no tweets"
+			else
+				msg = requested_tweets
+			end
+		end
+		render :json => { status: stat, message: msg } 
 	end
 	
 	private

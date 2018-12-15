@@ -30,6 +30,19 @@ class TweetsController < ApplicationController
   		render :json => { status: stat, message: msg }
   	end
 
+  	def make_retweet
+  		stat = "Nok"
+  		original_tweet = Tweet.find_by_id(params[:retweet_id])
+  		if original_tweet.nil?
+  			msg = "You cannot retweet a non existent tweet"
+  		else
+  			new_retweet = Tweet.new(user_id: current_user, tweet_content: original_tweet.tweet_content)
+  			msg = "Retweeted Successfully"
+  			stat = "Ok"
+  		end
+  		render :json => { status: stat, message: msg }
+  	end
+
   	private 
 
   	def permitted_params

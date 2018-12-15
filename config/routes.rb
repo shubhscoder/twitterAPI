@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 	delete 'remove/:tweet_id', to: 'tweets#delete_tweet'
 	get 'like/:tweet_id', to: 'likes#like_tweet'
 	get 'unlike/:tweet_id', to: 'likes#unlike_tweet'
-	get "/404" => "errors#not_found"
-	get "/500" => "errors#exception"
+	get '/404' => "errors#not_found"
+	get '/500' => "errors#exception"
+	get 'retweet/:retweet_id', to: 'tweets#make_retweet'
+	get 'usertweets/:username', to: 'users#get_requested_tweets'
 end

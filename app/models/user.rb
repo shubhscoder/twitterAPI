@@ -47,16 +47,13 @@ class User < ApplicationRecord
 
 	def get_followers_tweets
 		user_follower_tweets = Tweet.select("t.id, t.created_at, t.tweet_content, t.user_id").from("tweets t").joins("INNER JOIN follows as f ON t.user_id = f.following_id").where("f.user_id = ?",self.id)
-		array_of_tweets = []
-		for i in user_follower_tweets
-			dict_tweet = {}
-			dict_tweet["username"] = User.find(i.user_id).username
-			dict_tweet["tweet_content"] = i.tweet_content
-			dict_tweet["created_at"] = i.created_at
-			dict_tweet["tweet_id"] = i.id
-			array_of_tweets << dict_tweet 
-		end
-		array_of_tweets = array_of_tweets.sort_by {|k| k["created_at"] }
+		array_of_tweets = filter_tweets(user_follower_tweets)
+		return array_of_tweets,array_of_tweets.size
+	end
+
+	def get_tweets
+		req_tweets = Tweet.where(user_id: self.id)
+		array_of_tweets = filter_tweets(req_tweets)
 		return array_of_tweets,array_of_tweets.size
 	end
 
@@ -79,5 +76,19 @@ class User < ApplicationRecord
 			filtered_follow_relationship << follower_instance
 		end
 		return filtered_follow_relationship
+	end
+
+	def filter_tweets(tweets_arr)
+		array_of_tweets = []
+		for i in tweets_arr
+			dict_tweet = {}
+			dict_tweet["username"] = User.find(i.user_id).username
+			dict_tweet["tweet_content"] = i.tweet_content
+			dict_tweet["created_at"] = i.created_at
+			dict_tweet["tweet_id"] = i.id
+			array_of_tweets << dict_tweet 
+		end
+		array_of_tweets = array_of_tweets.sort_by {|k| k["created_at"] }
+		return array_of_tweets
 	end
 end
